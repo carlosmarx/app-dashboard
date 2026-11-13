@@ -17,19 +17,45 @@ Aplicação Laravel 13 + Inertia v3 + React 19 (TypeScript) + Tailwind v4, com a
     cd app-dashboard
     ```
 
-2. Crie o arquivo do banco SQLite (ele não é versionado):
+2. Instale as dependências PHP e JS:
+
+    ```bash
+    composer install
+    npm install
+    ```
+
+3. Crie o arquivo de ambiente a partir do exemplo:
+
+    ```bash
+    cp .env.example .env
+    ```
+
+    O `.env` não é versionado. Ajuste nele o que for necessário (nome da aplicação, URL, banco, e-mail). Os valores padrão já funcionam para desenvolvimento local com SQLite.
+
+4. Gere a chave da aplicação (preenche a `APP_KEY` no `.env`):
+
+    ```bash
+    php artisan key:generate
+    ```
+
+    Sem essa chave, a aplicação não sobe e retorna o erro "No application encryption key has been specified".
+
+5. Crie o arquivo do banco SQLite (ele não é versionado) e rode as migrations:
 
     ```bash
     touch database/database.sqlite
+    php artisan migrate
     ```
 
-3. Rode o setup. Ele instala as dependências PHP e JS, cria o `.env` a partir do `.env.example`, gera a `APP_KEY`, roda as migrations e faz o build do frontend:
+6. Faça o build do frontend:
 
     ```bash
-    composer setup
+    npm run build
     ```
 
-4. Suba o ambiente de desenvolvimento:
+    > Atalho: `composer setup` executa os passos 2 a 6 de uma vez (o arquivo SQLite do passo 5 ainda precisa existir).
+
+7. Suba o ambiente de desenvolvimento:
 
     ```bash
     composer dev
@@ -37,7 +63,7 @@ Aplicação Laravel 13 + Inertia v3 + React 19 (TypeScript) + Tailwind v4, com a
 
     Esse comando inicia, juntos, o servidor PHP (`php artisan serve`), o Vite com hot reload, o worker de filas e, quando disponível, o visualizador de logs (Pail).
 
-5. Acesse **http://localhost:8000** e crie uma conta em "Register".
+8. Acesse **http://localhost:8000** e crie uma conta em "Register".
 
 ## Observações
 
